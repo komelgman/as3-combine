@@ -8,11 +8,11 @@ package kom.bine {
 	import flash.events.ProgressEvent;
 	import flash.utils.getDefinitionByName;
 
-	import ru.oceanit.StartScreen;
+	import kom.bine.LoadingScreen;
 
 	public class Preloader extends MovieClip {
 
-		public var screen : StartScreen = new StartScreen();
+		public var screen : LoadingScreen = new LoadingScreen();
 
 		public function Preloader() {
 			if (stage) {
