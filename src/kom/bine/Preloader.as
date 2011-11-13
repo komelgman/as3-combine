@@ -8,8 +8,6 @@ package kom.bine {
 	import flash.events.ProgressEvent;
 	import flash.utils.getDefinitionByName;
 
-	import kom.bine.LoadingScreen;
-
 	public class Preloader extends MovieClip {
 
 		public var screen : LoadingScreen = new LoadingScreen();
@@ -21,9 +19,16 @@ package kom.bine {
 			}
 
 			addEventListener(Event.ENTER_FRAME, onEnterFrame);
+			stage.addEventListener(Event.RESIZE, onStageResize);
 			loaderInfo.addEventListener(ProgressEvent.PROGRESS, onProgress);
 
 			addChild(screen);
+			onStageResize();
+		}
+
+		private function onStageResize(event : Event = null) : void {
+			screen.x = stage.stageWidth / 2;
+			screen.y = stage.stageHeight / 2;
 		}
 
 		private function onProgress(e : ProgressEvent) : void {
@@ -40,6 +45,8 @@ package kom.bine {
 		private function loadingFinished() : void {
 			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 			loaderInfo.removeEventListener(ProgressEvent.PROGRESS, onProgress);
+			stage.removeEventListener(Event.RESIZE, onStageResize);
+
 			removeChild(screen);
 			stop();
 
